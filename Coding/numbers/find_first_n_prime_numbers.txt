@@ -1,0 +1,45 @@
+import java.util.*;
+public class Test_Example {
+
+    public static void main(String[] args)
+    {       
+        ArrayList<Integer> al = find_prime_number(30);
+        System.out.println(al);
+    }
+
+
+    public static ArrayList<Integer> find_prime_number(int n)
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        HashSet<Integer> hset = new HashSet<>();
+        al.add(2);
+        int status = 1;
+        int num = 3;
+        for(int i = 2;i<=10;)
+        {
+            for(int j=2;j<=Math.sqrt(num);j++)
+            {
+                if(hset.contains(i)) {
+                    j++;
+                    continue;
+                }
+
+                if(num%j ==0)
+                {
+                    status = 0;
+                    hset.add(j);
+                    break;
+                }
+            }
+
+            if ( status != 0 )
+            {
+                al.add(num);
+                i++;
+            }
+            status = 1;
+            num++;
+        }
+        return al;
+    }   
+}
