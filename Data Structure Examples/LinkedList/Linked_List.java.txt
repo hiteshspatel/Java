@@ -1,0 +1,146 @@
+package LinkedList;
+
+public class Linked_List{
+
+    public class Node{
+        public int data;
+        public Node next_node;
+    }
+
+    public Node headNode;
+    public int size;
+
+    public Linked_List(){
+        size =0;
+        headNode = null;
+    }
+
+    public void insertAtHead(int data)
+    {
+        Node n = new Node();
+        n.data = data;
+        n.next_node = headNode;
+        headNode = n;
+        size++;
+    }
+
+    public void insertAtEnd(int data)
+    {
+        if(isEmpty())
+            insertAtHead(data);
+
+        Node n = new Node();
+        n.data = data;
+        Node cur = headNode;
+        while(cur.next_node != null)
+            cur = cur.next_node;
+
+        cur.next_node = n;
+        size++;
+    }
+
+    public void insertAfter(int data,int previous)
+    {
+        if(isEmpty())
+            insertAtHead(data);
+
+        Node n = new Node();
+        n.data = data;
+        Node cur = headNode;
+
+        while(cur != null && !(cur.data == previous))
+        {
+            cur = cur.next_node;
+        }
+
+        if(cur != null)
+        {
+            n.next_node = cur.next_node;
+            cur.next_node = n;
+            size++;
+        }
+    }
+
+    public boolean searchNode(int data)
+    {
+        Node cur = headNode;
+        while(cur != null)
+        {
+            if(cur.data == data)
+            {
+                return true;
+            }
+            cur = cur.next_node;
+        }
+        return false;
+    }
+
+    public void deleteAtHead()
+    {
+        if(isEmpty())
+            return;
+
+       headNode = headNode.next_node;
+       size--;
+    }
+
+    public void deleteByValue(int data)
+    {
+        if(isEmpty())
+            return;
+
+        Node cur = headNode;
+        Node prev = null;
+
+        if(cur.data == data)
+        {
+            deleteAtHead();
+            return;
+        }
+
+        while(cur!=null)
+        {
+            if(cur.data == data)
+            {
+                prev.next_node = cur.next_node;
+                size--;
+                return;
+            }
+            prev = cur;
+            cur = cur.next_node;
+        }
+    }
+
+    public boolean isEmpty(){
+        if(headNode == null)
+            return true;
+        else
+            return false;
+    }
+
+    public void printLinkedList()
+    {
+        Node cur = headNode;
+        while(cur != null) {
+            System.out.print(cur.data + " ");
+            cur = cur.next_node;
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Linked_List ll = new Linked_List();
+        ll.insertAtHead(1);
+        ll.insertAtEnd(2);
+        ll.insertAtEnd(3);
+        ll.insertAtEnd(4);
+        ll.insertAtEnd(6);
+        ll.insertAfter(5,4);
+        ll.printLinkedList();
+        System.out.println(ll.searchNode(6));
+        ll.deleteAtHead();
+        ll.deleteByValue(5);
+        ll.printLinkedList();
+    }
+
+}
