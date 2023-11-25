@@ -1,0 +1,7 @@
+Download JDK and create JAVA_HOME Environment variable and add bin folder to path variable
+Download Maven and create MAVEN_HOME Environment variable and add bin folder to path variable
+Create Maven WebApp architype
+Add plugin for tomcat server
+Run mvn clean install tomcat7:run
+Dialog box will pop-up from firewall. Allow it.
+click on http://localhost:8080
